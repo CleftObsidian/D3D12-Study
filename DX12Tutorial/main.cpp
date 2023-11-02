@@ -1,6 +1,4 @@
-#include "D3D12Lite.h"
-
-using namespace D3D12Lite;
+#include "Renderer.h"
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMessage, WPARAM wParam, LPARAM lParam)
 {
@@ -106,6 +104,8 @@ int main()
 	SetFocus(windowHandle);
 	ShowCursor(TRUE);
 
+	std::unique_ptr<Renderer> renderer = std::make_unique<Renderer>(windowHandle, windowSize);
+
 	BOOL shouldExit = FALSE;
 	while (!shouldExit)
 	{
@@ -120,6 +120,8 @@ int main()
 		{
 			shouldExit = TRUE;
 		}
+
+		renderer->Render();
 	}
 
 	DestroyWindow(windowHandle);
